@@ -36,6 +36,7 @@ sub weave_section {
         die "Please specify code" unless $code;
         $self->log_debug(["compiling code ..."]);
         $code = "sub { $code }" unless $code =~ /^\s*sub\s*\{/s;
+        $self->log_debug(["code is: %s", $code]);
         eval "\$self->{_compiled_code} = $code";
         die "Can't compile code '$code': $@" if $@;
     }
