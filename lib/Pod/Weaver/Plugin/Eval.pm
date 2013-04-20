@@ -34,9 +34,9 @@ sub weave_section {
     if (!$self->{_compiled_code}) {
         my $code = $self->code;
         die "Please specify code" unless $code;
-        $self->log_debug(["compiling code ..."]);
+        $self->log(["compiling code ..."]);
         $code = "sub { $code }" unless $code =~ /^\s*sub\s*\{/s;
-        $self->log_debug(["code is: %s", $code]);
+        $self->log(["code is: %s", $code]);
         eval "\$self->{_compiled_code} = $code";
         die "Can't compile code '$code': $@" if $@;
     }
@@ -51,7 +51,7 @@ sub weave_section {
         $package =~ s!/!::!g;
 
     } else {
-        $self->log_debug(["skipped file %s (not a Perl module)", $filename]);
+        $self->log(["skipped file %s (not a Perl module)", $filename]);
         return;
     }
     if (defined $self->include_files) {
@@ -59,7 +59,7 @@ sub weave_section {
         eval { $re = qr/$re/ };
         $@ and die "Invalid regex in include_files: $re ($@)";
         unless ($filename =~ $re) {
-            $self->log_debug(["skipped file %s (doesn't match exclude_files)",
+            $self->log(["skipped file %s (doesn't match exclude_files)",
                               $filename]);
             return;
         }
@@ -78,7 +78,7 @@ sub weave_section {
     local @INC = ("lib", @INC);
 
     # run code
-    $self->log_debug(["loading module %s", $package]);
+    $self->log(["running code on module %s", $package]);
     my %args = (
         args     => \@_,
         document => $document,
@@ -143,6 +143,10 @@ with C<%args> containing these keys:
 =item * filename => STR
 
 =item * package => STR
+
+=item * module => STR
+
+Alias for C<package>.
 
 =item * args => ARRAY
 
