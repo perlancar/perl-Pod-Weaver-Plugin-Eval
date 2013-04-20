@@ -5,7 +5,6 @@ use Moose;
 with 'Pod::Weaver::Role::Section';
 
 use List::Util qw(first);
-use Module::Load;
 use Pod::Elemental;
 use Pod::Elemental::Element::Nested;
 
@@ -76,10 +75,6 @@ sub weave_section {
     }
 
     local @INC = ("lib", @INC);
-    if ($ext eq 'pm') {
-        $self->log_debug(["loading module %s", $package]);
-        load $package;
-    }
 
     # run code
     $self->log_debug(["loading module %s", $package]);
@@ -106,14 +101,14 @@ In your C<weaver.ini>:
  [-Eval]
  include_modules = ^Foo::Bar$
  ;include_files  = REGEX
- code = sub { my ($self, %args)=@_; my $document = $args{document}; push @{$document->children}, ... }
+ code = sub { my ($self, %args)=@_; use Module::Load; load $args{module}; my $document = $args{document}; push @{$document->children}, ... }
 
 
 =head1 DESCRIPTION
 
-This plugin load modules and evaluates Perl code. It can be used to extract
-stuffs from the module (like some configuration or hash keys) and insert it to
-the POD.
+This plugin evaluates Perl code specified in your weaver.ini (or dist.ini). It
+can be used to do various stuffs that might be too trivial/short to build a
+dedicated Pod::Weaver::Plugin for.
 
 I first created this module to insert list of border styles and color themes
 contained in C<%border_styles> package variable in
