@@ -148,7 +148,7 @@ with C<%args> containing these keys:
 
 =item * package => STR
 
-=tem * args => ARRAY
+=item * args => ARRAY
 
 The original C<@_> passed to weave_section(). Note that weave_section() is
 passed:
