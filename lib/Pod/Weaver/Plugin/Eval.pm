@@ -1,14 +1,13 @@
 package Pod::Weaver::Plugin::Eval;
 
+# DATE
+# VERSION
+
 use 5.010001;
 use Moose;
 with 'Pod::Weaver::Role::Section';
 
 use List::Util qw(first);
-use Pod::Elemental;
-use Pod::Elemental::Element::Nested;
-
-# VERSION
 
 # regex
 has include_modules => (
