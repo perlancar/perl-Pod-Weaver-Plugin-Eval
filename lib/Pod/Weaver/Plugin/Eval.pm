@@ -90,13 +90,13 @@ sub weave_section {
 }
 
 1;
-# ABSTRACT: Evaluate code
+# ABSTRACT: (DEPRECATED) Evaluate code
 
 =for Pod::Coverage weave_section
 
 =head1 SYNOPSIS
 
-In your C<weaver.ini>:
+In your F<weaver.ini>:
 
  [-Eval]
  include_modules = ^Foo::Bar$
@@ -105,6 +105,9 @@ In your C<weaver.ini>:
 
 
 =head1 DESCRIPTION
+
+B<DEPRECATION NOTICE:> This module is deprecated in favor of
+L<Pod::Weaver::Plugin::Run>.
 
 This plugin evaluates Perl code specified in your weaver.ini (or dist.ini). It
 can be used to do various stuffs that might be too trivial/short to build a
@@ -170,3 +173,5 @@ input (original) document. Can also be retrieved from C<args>.
 =head1 SEE ALSO
 
 L<Pod::Weaver>
+
+L<Pod::Weaver::Plugin::Run>
