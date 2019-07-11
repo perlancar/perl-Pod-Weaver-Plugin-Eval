@@ -1,15 +1,15 @@
-0.03    2016-10-14 (PERLANCAR)
+0.03    2016-10-14  Released-By: PERLANCAR
 
 	- No functional changes.
 
 	- Add deprecation notice.
 
 
-0.02    2013-04-20 (SHARYANTO)
+0.02    2013-04-20  Released-By: SHARYANTO
 
         - To be more generic, no longer loads modules for you.
 
 
-0.01    2013-04-20 (SHARYANTO)
+0.01    2013-04-20  Released-By: SHARYANTO
 
         - First release.
